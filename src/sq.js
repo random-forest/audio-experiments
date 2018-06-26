@@ -92,7 +92,7 @@ var fmDefaults = {
   }  ,
   envelope  : {
   attack  : 0.01 ,
-  decay  : 0.01 ,
+  decay  : 3.01 ,
   sustain  : 1 ,
   release  : 0.5
   }  ,
@@ -100,7 +100,7 @@ var fmDefaults = {
     type  : "square"
   }  ,
   modulationEnvelope  : {
-    attack  : 0.5 ,
+    attack  : 15.5 ,
     decay  : 0 ,
     sustain  : 1 ,
     release  : 0.5
@@ -216,20 +216,16 @@ R.map(arr => {
 
 var loop = new Tone.Sequence(function(time, col){
   (y > matrix.length) ? (y = 0) : (y += 1)
-  //console.log(currentSynthIndex)
+
   for (var i = 0; i < matrix[col].length; i++) {
-    
-    // matrix[col][i] === 1 &&  
-    //   synths[currentSynthIndex][1].triggerAttack(runtime[y], time);
-    // matrix[col][i] === 0 &&
-    //   synths[currentSynthIndex][1].triggerRelease(time * Math.PI);
     if (matrix[col][i] === 1) {
       if (m[i] && m[i][col]) {
         var e = document.getElementById(R.values(m[i][col]).join(':'));
         e.style.color = colors[synths[currentSynthIndex][0]]
       }
 
-      synths[currentSynthIndex][1].triggerAttackRelease(runtime[y], time);
+      runtime[i][1]();
+      //synths[currentSynthIndex][1].triggerAttackRelease(runtime[y][1], time);
     } 
     else {
       if (m[col] && m[col][i]) {
@@ -334,15 +330,15 @@ k.down('ctrl l', e => {
 .down('any letter', e => {
   var targetKey = keyMap[e.key];
   Tone.Transport.start('+0.1');
-  targetKey && runtime.push(targetKey);
+  targetKey && runtime.push([targetKey, synths[currentSynthIndex][1].triggerAttackRelease.bind(synths[currentSynthIndex][1],targetKey, '8n')]);
   
   !loopEnabled && synths[currentSynthIndex][1].triggerAttackRelease(targetKey, '8n');
-
-  matrix[y] && runtime.indexOf(runtime[runtime.length - 1]) != -1  
-    && (matrix[y][runtime.indexOf(runtime[runtime.length - 1])] = 1)
+  
+  runtime.indexOf(runtime[runtime.length - 1]) !== -1 &&
+    matrix[y] && (matrix[y][runtime.indexOf(runtime[runtime.length - 1])] = 1)
 })
 .up('any letter', e => {
   if (matrix[y] && runtime.length > matrix[y].length - 1) {
-    runtime[y] = keyMap[e.key]
+    runtime[y] = [keyMap[e.key], synths[currentSynthIndex][1].triggerAttackRelease.bind(synths[currentSynthIndex][1],keyMap[e.key]  , '8n')]
   }
 });
