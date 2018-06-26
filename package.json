@@ -1,0 +1,21 @@
+{
+  "name": "electron-quick-start",
+  "version": "1.0.0",
+  "description": "Simple step-siquanser",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "vlad vtornikov",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^2.0.0"
+  },
+  "dependencies": {
+    "audio-buffer-from": "^1.1.1",
+    "audio-stream": "^0.2.0",
+    "kibo": "^0.1.0",
+    "ramda": "^0.25.0",
+    "tone": "^0.12.80"
+  }
+}

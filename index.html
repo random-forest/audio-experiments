@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Synth</title>
+    <script src="libs/kibo.min.js"></script>
+  </head>
+  <body style="background: black;">
+    <style>
+      body {
+        /* text-align: center; */
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+      #content {
+        display: flex;
+        width: 100%;
+        height: 100vh;
+        align-items: flex-start;
+        align-content: flex-start;
+      }
+      #steps {
+        display: inline-block;
+        padding-top: calc(25% - 352px / 2);
+        width: 352px;
+        height: 100%;        
+        margin: 0 auto;
+      }
+    </style>
+    <div id="content">
+      <div id="steps"></div>
+    </div>
+    <script>
+      var randomCoords;
+      var bpmValue;
+      require('./src/sq.js')
+    </script>
+  </body>
+</html>
