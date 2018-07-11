@@ -20,6 +20,15 @@
         align-items: flex-start;
         align-content: flex-start;
       }
+      .manual {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: white
+      }
+      .manual span {
+        display: block;
+      }
       #steps {
         display: inline-block;
         padding-top: calc(25% - 352px / 2);
@@ -29,6 +38,12 @@
       }
     </style>
     <div id="content">
+      <div class="manual">
+        <span>[ ctrl l ] -> start/stop looop;</span>
+        <span>[ 1...4 ] -> change synth;</span>
+        <span>[ qwerty... ] -> play synth;</span>
+      </div>
+      
       <div id="steps"></div>
     </div>
     <script>

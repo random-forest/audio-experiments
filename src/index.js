@@ -145,9 +145,6 @@ function handleMouseMove(event) {
 
     event = event || window.event; // IE-ism
 
-    // If pageX/Y aren't available and clientX/Y are,
-    // calculate pageX/Y - logic taken from jQuery.
-    // (This is to support old IE)
     if (event.pageX == null && event.clientX != null) {
         eventDoc = (event.target && event.target.ownerDocument) || document;
         doc = eventDoc.documentElement;
@@ -162,7 +159,6 @@ function handleMouseMove(event) {
     }
 
     randomCoords = event.pageX / event.pageY;
-    // Use event.pageX / event.pageY here
 }
 
 var loop = new Tone.Sequence(function(time, col) {
